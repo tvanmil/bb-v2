@@ -1,4 +1,4 @@
-<%if ( item === 'profile' ) { %>
+<% if ( item === 'profile' ) { %>
 
 	<div class="left">
 		<div class="header">
@@ -24,33 +24,38 @@
 		</div>
 		<div class="left">
 			<div class="title">ACCOUNT BALANCE</div>
-			<div class="value">€ 50.00</div>
+			<div class="value">&euro; <%= data.balance.toFixed(2) %></div>
 		</div>
 		<div class="middle">
 			<div class="title">INVESTMENT</div>
-			<div class="value">€ 50.00</div>
+			<div class="value">&euro; <%= data.investment.toFixed(2) %></div>
 			<div class="title">PROFIT</div>
-			<div class="value">€ 50.00</div>
+			<div class="value">&euro; <%= data.profit.toFixed(2) %></div>
 			<div class="title">CHECKOUT</div>
-			<div class="value">€ 50.00</div>
+			<div class="value">&euro; <%= data.checkout.toFixed(2) %></div>
 		</div>
-		<div class="right"></div>
+		<div class="right">
+			<div class="invest"></div>
+			<div class="checkout"></div>
+		</div>
 		<div class="subheader">
 			<div class="date bbFontLight">date</div>
 			<div class="time bbFontLight">time</div>
 			<div class="debitcredit bbFontLight">debit/credit</div>
-			<div class="money bbFontLight">money</div>
+			<div class="amount bbFontLight">amount</div>
 			<div class="description bbFontLight">description</div>
 			<div class="balance bbFontLight">balance</div>			
 		</div>
-		<div class="item">
-			<div class="date">date</div>
-			<div class="time">time</div>
-			<div class="debitcredit">debit/credit</div>
-			<div class="money">money</div>
-			<div class="description">description</div>
-			<div class="balance">balance</div>
-		</div>
+		<% for(var i=0; i<data.transactions.length; i++) { %>
+			<div class="item">
+				<div class="date"><%= data.transactions[i].date %></div>
+				<div class="time"><%= data.transactions[i].time %></div>
+				<div class="debitcredit"><%= data.transactions[i].debitcredit %></div>
+				<div class="amount"><%= data.transactions[i].amount %></div>
+				<div class="description"><%= data.transactions[i].description %></div>
+				<div class="balance"><%= data.transactions[i].balance %></div>
+			</div>
+		<% } %>
 		
 	</div>
 	
@@ -58,24 +63,24 @@
 
 
 
-<%if ( item === 'activematches' ) { %>
+<% if ( item === 'activematches' ) { %>
 
 	<div class="header">
 		<span class="title bbFontLight">active matches</span>
 	</div>
+	
+	<% for(var i=0; i<data.length; i++) { %>
 		<div class="item" id="9">
-			<div class="name">Nederland - Italie</div>
-			<div class="time">20:30</div>
-			<div class="date">06/02/2013</div>
+			<div class="name"><%= data[i].description %></div>
+			<div class="time"><%= data[i].time %></div>
+			<div class="date"><%= data[i].date %></div>
 		</div>
-	<%if ( typeof(data) != 'undefined' ) { %>
-
 	<% } %>
 	
 <% } %>
 
 
-<%if ( item === 'favourites' ) { %>
+<% if ( item === 'favourites' ) { %>
 
 	<div class="header">
 		<span class="title bbFontLight">favourite matches</span>
@@ -88,7 +93,7 @@
 <% } %>
 
 
-<%if ( item === 'search' ) { %>
+<% if ( item === 'search' ) { %>
 
 	<div class="header">
 		<span class="title bbFontLight">search</span>

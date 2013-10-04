@@ -35,6 +35,9 @@ div#menu .item#home.open { background-position: 0 -147px;}
 div#menu .item#home:hover { background-position: 0 -49px;}
 div#menu .item#home:active { background-position: 0 -98px;}
 
+/* correct the erroneous styling done by the .open styling */
+div#menu .item.open {margin-left:0; -webkit-border-radius: 0; border-radius: 0; }
+
 div#menu .item#profile { background-position: -50px 0; }
 div#menu .item#profile.open { background-position: -50px -147px; }
 div#menu .item#profile.open:hover { background-position: -50px -147px; }
@@ -154,8 +157,12 @@ div#submenucontainer .header .title {
 #submenucontainer .right .left .value { float:left;clear:both;position:relative;top:33px;left:15px;color:#1a8cbf;font-size:22px;font-weight:Bold; }
 #submenucontainer .right .middle .title { float:left;clear:left;position:relative;top:23px;left:15px;color:#fff;font-size:11px; height:25px;}
 #submenucontainer .right .middle .value { float:right;clear:right;position:relative;top:23px;left:-50px;color:#1a8cbf;font-size:11px; }
-#submenucontainer .right .right #invest {float:left;width:220px;height:105px;border:0;border-left: 1px solid #6f6f6f;background-color:#4c4c4c;}
-#submenucontainer .right .right #checkout {float:left;width:220px;height:105px;border:0;border-left: 1px solid #6f6f6f;background-color:#4c4c4c;}
+#submenucontainer .right .right .invest { float:left;width:198px;height:34px;margin-top:17px;margin-left:10px;background:url('../img/menu.png') -6px -197px; }
+#submenucontainer .right .right .invest:hover { background-position: -6px -231px; }
+#submenucontainer .right .right .invest:active { background-position: -6px -264px; }
+#submenucontainer .right .right .checkout { float:left;width:198px;height:34px;margin-top:5px;margin-left:10px;background:url('../img/menu.png') -203px -197px;}
+#submenucontainer .right .right .checkout:hover { background-position: -203px -231px;}
+#submenucontainer .right .right .checkout:active { background-position: -203px -264px;}
 
 
 div#submenucontainer .right .subheader {
@@ -180,13 +187,13 @@ div#submenucontainer .right .subheader .bbFontLight { position:relative;top:11px
 div#submenucontainer .right .subheader .date { width:64px; }
 div#submenucontainer .right .subheader .time { width:54px; }
 div#submenucontainer .right .subheader .debitcredit { width:85px; }
-div#submenucontainer .right .subheader .money { width:70px; }
+div#submenucontainer .right .subheader .amount { width:70px; }
 div#submenucontainer .right .subheader .description { width:198px; }
 div#submenucontainer .right .subheader .balance { width:87px; }
 div#submenucontainer .right .date { width:64px; }
 div#submenucontainer .right .time { width:54px; }
 div#submenucontainer .right .debitcredit { width:85px; }
-div#submenucontainer .right .money { width:70px; }
+div#submenucontainer .right .amount { width:70px; }
 div#submenucontainer .right .description { width:198px; }
 div#submenucontainer .right .balance { width:87px; }
 

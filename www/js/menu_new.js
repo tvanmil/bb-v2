@@ -60,24 +60,41 @@ $(document).ready(function() {
 });
 
 
-function openMenu(item) {
+function openMenu(item, subitem) {
+	
+	if ( !subitem ) subitem = 'accountbalance'; // Open the account balance subitem if there is no subitem given
+	
 	// place 'width' to the left
 	$( "div#submenucontainer" ).css( 'left', -BetBiddingMenu.widths[item] + "px" );
 
-	// load content
-	// TODO: fetch content
 	// TODO: display loading icon
-	// TODO: put fetched content (JSON) in template 
-	console.log("item openMenu: "+item);
-	
+	// TODO: enable other 'profile' submenu's (personal information and played matches)
+	// fetch content
 	// For development menuData is defined as invariable. The returned JSON object
 	// should be the basis for the EJS template fillings in the final version. The
 	// script that returns JSON data should however first be created.
 	//var menuData = JSON.parse(data);
 	var menuData = "data"; 
 	
-	$( "div#submenucontainer" ).html( new EJS({ url: 'templates/menu.ejs' }).render( { item: item, data: menuData } ) );
-	
+	if ( item === 'profile' || item === 'activematches' ) {
+		data = { type: item, subitem: subitem };
+		$.ajax({
+			type:'GET',
+			url:'devfiles/menu.php',
+			cache:false,
+			data:data,
+			success:(function (d){
+				console.log("temp MD: "+menuData);
+				console.log("received: "+d);
+				menuData = JSON.parse(d);
+				$( "div#submenucontainer" ).html( new EJS({ url: 'templates/menu.ejs' }).render( { item: item, data: menuData } ) );
+
+			})
+		});
+	} 
+
+	console.log("and now: "+JSON.stringify(menuData));
+		
 	// resize to 'width'
 	$( "div#submenucontainer" ).css( 'width', BetBiddingMenu.widths[item] + "px") ;
 
