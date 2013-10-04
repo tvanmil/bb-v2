@@ -351,12 +351,12 @@ float:left;
 	margin:2px 0 0 2px; 
 	height: 73px;
 }
-.sell .back .content .button {float: right;height: 50px;width: 30px;margin-right: 3px;margin-top: 2px;background: url('../img/icons.png') -100px -90px;}
-.sell .back .content .button:hover {background-position: -130px -90px;}
-.sell .back .content .button:active {background-position: -160px -90px;}
-.buy .back .content .button {float: right;height: 50px;width: 30px;margin-right: 3px;margin-top: 2px;background: url('../img/icons.png') -190px -90px;}
-.buy .back .content .button:hover {background-position: -220px -90px;}
-.buy .back .content .button:active {background-position: -250px -90px;}
+.sell .back .content .button_ok {float: right;height: 50px;width: 30px;margin-right: 3px;margin-top: 2px;background: url('../img/icons.png') -100px -90px;}
+.sell .back .content .button_ok:hover {background-position: -130px -90px;}
+.sell .back .content .button_ok:active {background-position: -160px -90px;}
+.buy .back .content .button_ok {float: right;height: 50px;width: 30px;margin-right: 3px;margin-top: 2px;background: url('../img/icons.png') -190px -90px;}
+.buy .back .content .button_ok:hover {background-position: -220px -90px;}
+.buy .back .content .button_ok:active {background-position: -250px -90px;}
 
 .back .header .title {
 position: relative;

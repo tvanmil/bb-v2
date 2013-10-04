@@ -1,8 +1,40 @@
 
 <%if (state === 'front') { %>
-	<%if (buysell == 'sell') { %>
-		<div class="button <%= buysell %>"></div>
-	<% } else { %>
+	<div class="button <%= buysell %>"></div>
+<% } %>
+
+
+<%if (state === 'back') { %>
+	<div class="back none">
+		<div class="header">
+			<div class="cancel"></div>
+			<div class="title"><%= buysell %> Nederland</div>
+		</div>
+		<div class="content">
+				<div class="button_ok"></div>
+				<div class="tickets">
+					<div class="arrowUp"></div>
+					<div class="arrowDown"></div>
+					<input type="text" value="10">
+					<div class="label standardFont">tickets</div>
+				</div>
+				<div class="price">
+					<div class="arrowUp"></div>
+					<div class="arrowDown"></div>
+					<input type="text" value="10">
+					<div class="label standardFont">price</div>
+				</div>
+		</div>
+	</div>
+<% } %>
+
+
+<%if (state === 'loading') { %>
+	<div class="button <%= buysell %>"></div>
+<% } %>
+
+
+<%if (state === 'open') { %>
 	<div class="back open">
 		<div class="header">
 			<div class="cancel"></div>
@@ -24,35 +56,4 @@
 				</div>
 		</div>
 	</div>	
-	<% } %>
-<% } %>
-
-
-<%if (state === 'back') { %>
-	<div class="back">
-		<div class="header">
-			<div class="cancel"></div>
-			<div class="title"><%= buysell %> Nederland</div>
-		</div>
-		<div class="content">
-				<div class="button"></div>
-				<div class="tickets">
-					<div class="arrowUp"></div>
-					<div class="arrowDown"></div>
-					<input type="text" value="10">
-					<div class="label standardFont">tickets</div>
-				</div>
-				<div class="price">
-					<div class="arrowUp"></div>
-					<div class="arrowDown"></div>
-					<input type="text" value="10">
-					<div class="label standardFont">price</div>
-				</div>
-		</div>
-	</div>
-<% } %>
-
-
-<%if (state === 'loading') { %>
-	<div class="button <%= buysell %>"></div>
 <% } %>

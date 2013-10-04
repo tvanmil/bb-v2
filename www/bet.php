@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>
-			Untitled Document
+			BetBidding.com
 		</title>
 
 		<link rel="stylesheet" type="text/css" href="css/bet.css">
@@ -12,6 +12,7 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script src="js/menu_new.js"></script>
+		<script src="js/bet_events.js"></script>
 		<script src="js/jquery.flip.js"></script>
 		<script src="js/ejs.js"></script>
 		<script src="js/prefixfree.min.js"></script>
@@ -87,31 +88,6 @@
 
 				$( ".scoreBoard" ).html(htmlFlipClock);
 				$( ".container#outcomes" ).html(htmlOutcomes);
-				
-				
-				// Attach event handlers for the buy and sell buttons //
-				// Attach handler to step 1 (buy sell buttons)
-				$( ".container" ).delegate( ".content .left .button" , 'click', function(e) { 
-					e.stopPropagation();
-					$(this).parent().flip({
-						direction:'rl',
-						color:'#6c6c6c',
-						speed: 200,
-						content:new EJS({url: "templates/buttonStates.ejs" }).render({ buysell: 'sell', state: 'back'}),
-					})
-				});
-				// Attach handler to step 2 (pressing the cancel icon top right)
-				$( ".container" ).delegate( ".back .header .cancel" , "click", function(e) { 
-					e.stopPropagation();
-					$(this).parent().parent().parent().flip({
-						direction:'lr',
-						color:'#6c6c6c',
-						speed: 200,
-						content:new EJS({url: 'templates/buttonStates.ejs'}).render({ buysell: $(this).parent().parent().parent().attr('class'), state: 'front'}),
-					})
-				});					
-				// TODO: Attach handler to step 2 (pressing the "OK" button) => turn to 'loading' icon
-				// TODO: Attach handler to step 4 (pressing cancel button on 'outstanding order' layout)
 				
 				
 				$( ".content .left .sell" ).html( new EJS({url: 'templates/buttonStates.ejs'}).render({ buysell: 'sell', state: 'front' }) );
