@@ -75,9 +75,10 @@ function openMenu(item, subitem) {
 	// script that returns JSON data should however first be created.
 	//var menuData = JSON.parse(data);
 	var menuData = "data"; 
-	
+	console.log("A: "+item);
 	if ( item === 'profile' || item === 'activematches' ) {
 		data = { type: item, subitem: subitem };
+		console.log("type: "+item+ ", subitem: "+subitem );
 		$.ajax({
 			type:'GET',
 			url:'devfiles/menu.php',
@@ -86,7 +87,12 @@ function openMenu(item, subitem) {
 			success:(function (d){
 				console.log("temp MD: "+menuData);
 				console.log("received: "+d);
-				menuData = JSON.parse(d);
+				menuData = {};
+				menuData.subitem = subitem;
+				menuData.content = JSON.parse(d); 
+
+				console.log("item: "+item+", menuData: ");
+				console.log(new EJS({ url: 'templates/menu.ejs' }).render( { item: item, data: menuData } ));
 				$( "div#submenucontainer" ).html( new EJS({ url: 'templates/menu.ejs' }).render( { item: item, data: menuData } ) );
 
 			})

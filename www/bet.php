@@ -21,6 +21,9 @@
 		<script src="js/modernizr.js"></script>
 		<script src="js/bet_pusher.js"></script>
 		<script src="http://js.pusher.com/2.1/pusher.min.js" type="text/javascript"></script>
+		<script src="js/highstock.js"></script>
+		<script src="http://code.highcharts.com/modules/exporting.js"></script>
+		<script src="js/charts.js"></script>
 		<script type="text/javascript">
 			// Enable pusher logging - don't include this in production
 			Pusher.log = function(message) {
@@ -63,6 +66,10 @@
 			
 			$(function (){
 				
+				$( "#lineup" ).bind( "click" , function(){ buyLineMove("up"); });
+				$( "#linedown" ).bind( "click" , function(){ buyLineMove("down"); });
+
+				
 				setTimeout(function(){
 					//console.log('sethome');
 					scoreSingleSet('home',2);
@@ -81,25 +88,25 @@
 				$( "#clock-up" ).bind( "click" , function(){ scoreSingleUp( "home" ); });
 				
 				var dataFlipClock = { title: "klok", numbers: [10,10], scores: ['home','away']	};
-				var dataOutcomes = { title: "titel", outcomes:['Nederland','Italië','Gelijkspel'] };
-				
 				var htmlFlipClock = new EJS({url: "templates/flipclock.ejs" }).render(dataFlipClock);
-				var htmlOutcomes = new EJS({url: "templates/outcome.ejs" }).render(dataOutcomes);
-
 				$( ".scoreBoard" ).html(htmlFlipClock);
-				$( ".container#outcomes" ).html(htmlOutcomes);
-				
+
 				
 				$( ".content .left .sell" ).html( new EJS({url: 'templates/buttonStates.ejs'}).render({ buysell: 'sell', state: 'front' }) );
 				$( ".content .left .buy" ).html( new EJS({url: 'templates/buttonStates.ejs'}).render({ buysell: 'buy', state: 'front' }) );
+				
+				initializeOutcomes();
 
 			});
 		</script>
 		
 	</head>
 	<body>
-		<div id="clock-up" style="position:relative;left:56px;width:150px;height:25px;background-color:red">Add 1 to score</div>
-		<div id="clock-up" style="position:relative;left:56px;width:640px;height:115px;background-color:lightgreen">
+		
+		<div id="clock-up" style="position:relative;left:56px;top:10px;width:150px;height:25px;background-color:red">Add 1 to score</div>
+		<div id="lineup" style="position:relative;left:56px;top:10px;width:150px;height:25px;background-color:#efe">Add 10 buy line</div>
+		<div id="linedown" style="position:relative;left:56px;top:10px;width:150px;height:25px;background-color:#efe">Minus 10 buy line</div>
+		<div id="clock-up" style="position:relative;left:56px;top:10px;width:640px;height:115px;background-color:lightgreen">
 			<p>Pusher dashboard</p>
 			<div style="float:left;width:150px;background-color:#efefef;">
 				<button type="button" onclick="BetBidding.test_setNewScore()">Push score</button>

@@ -4,7 +4,7 @@
 		<div class="header">
 			<span class="title bbFontLight">your profile</span>
 		</div>
-		<div class="item">
+		<div class="item active">
 			<div class="title">ACCOUNT BALANCE</div>
 			<div class="arrow"></div> 
 		</div>
@@ -17,47 +17,85 @@
 			<div class="arrow"></div> 
 		</div>		
 	</div>
-	
-	<div class="right">
-		<div class="header">
-			<span class="title bbFontLight">your payments</span>
-		</div>
-		<div class="left">
-			<div class="title">ACCOUNT BALANCE</div>
-			<div class="value">&euro; <%= data.balance.toFixed(2) %></div>
-		</div>
-		<div class="middle">
-			<div class="title">INVESTMENT</div>
-			<div class="value">&euro; <%= data.investment.toFixed(2) %></div>
-			<div class="title">PROFIT</div>
-			<div class="value">&euro; <%= data.profit.toFixed(2) %></div>
-			<div class="title">CHECKOUT</div>
-			<div class="value">&euro; <%= data.checkout.toFixed(2) %></div>
-		</div>
+
+	<% if ( data.subitem === 'personalinformation' ) { %>
 		<div class="right">
-			<div class="invest"></div>
-			<div class="checkout"></div>
-		</div>
-		<div class="subheader">
-			<div class="date bbFontLight">date</div>
-			<div class="time bbFontLight">time</div>
-			<div class="debitcredit bbFontLight">debit/credit</div>
-			<div class="amount bbFontLight">amount</div>
-			<div class="description bbFontLight">description</div>
-			<div class="balance bbFontLight">balance</div>			
-		</div>
-		<% for(var i=0; i<data.transactions.length; i++) { %>
-			<div class="item">
-				<div class="date"><%= data.transactions[i].date %></div>
-				<div class="time"><%= data.transactions[i].time %></div>
-				<div class="debitcredit"><%= data.transactions[i].debitcredit %></div>
-				<div class="amount"><%= data.transactions[i].amount %></div>
-				<div class="description"><%= data.transactions[i].description %></div>
-				<div class="balance"><%= data.transactions[i].balance %></div>
+			<div class="header">
+				<span class="title bbFontLight">personal information</span>
 			</div>
-		<% } %>
-		
-	</div>
+			<div class="content">
+				<div class="textitem">
+					<div class="label">first name:</div>
+					<input type="text" />
+				</div>
+				<div class="textitem">
+					<div class="label">last name:</div>
+					<input type="text" />
+				</div>
+				<div class="textitem">
+					<div class="label">birthdate:</div>
+					<input type="text" />
+				</div>
+				<div class="textitem">
+					<div class="label">country:</div>
+					<input type="text" />
+				</div>
+				<div class="textitem">
+					<div class="label">username:</div>
+					<input type="text" />
+				</div>
+				<div class="textitem">
+					<div class="label">password:</div>
+					<input type="text" />
+				</div>
+				<div class="save"></div>
+			</div>
+		</div>
+	<% } %>
+	
+	
+	<% if ( data.subitem === 'accountbalance' ) { %>
+		<div class="right">
+			<div class="header">
+				<span class="title bbFontLight">your payments</span>
+			</div>
+			<div class="left">
+				<div class="title">ACCOUNT BALANCE</div>
+				<div class="value">&euro; <%= data.content.balance.toFixed(2) %></div>
+			</div>
+			<div class="middle">
+				<div class="title">INVESTMENT</div>
+				<div class="value">&euro; <%= data.content.investment.toFixed(2) %></div>
+				<div class="title">PROFIT</div>
+				<div class="value">&euro; <%= data.content.profit.toFixed(2) %></div>
+				<div class="title">CHECKOUT</div>
+				<div class="value">&euro; <%= data.content.checkout.toFixed(2) %></div>
+			</div>
+			<div class="right">
+				<div class="invest"></div>
+				<div class="checkout"></div>
+			</div>
+			<div class="subheader">
+				<div class="date bbFontLight">date</div>
+				<div class="time bbFontLight">time</div>
+				<div class="debitcredit bbFontLight">debit/credit</div>
+				<div class="amount bbFontLight">amount</div>
+				<div class="description bbFontLight">description</div>
+				<div class="balance bbFontLight">balance</div>			
+			</div>
+			<% for( var i = 0; i < data.content.transactions.length; i++ ) { %>
+				<div class="item">
+					<div class="date"><%= data.content.transactions[i].date %></div>
+					<div class="time"><%= data.content.transactions[i].time %></div>
+					<div class="debitcredit"><%= data.content.transactions[i].debitcredit %></div>
+					<div class="amount"><%= data.content.transactions[i].amount %></div>
+					<div class="description"><%= data.content.transactions[i].description %></div>
+					<div class="balance"><%= data.content.transactions[i].balance %></div>
+				</div>
+			<% } %>
+			
+		</div>
+	<% } %>
 	
 <% } %>
 
