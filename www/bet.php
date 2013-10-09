@@ -26,6 +26,9 @@
 		<script src="js/charts.js"></script>
 		<script type="text/javascript">
 			// Enable pusher logging - don't include this in production
+			var chart = [];
+			var data = [];
+			
 			Pusher.log = function(message) {
 				if (window.console && window.console.log) {
 					window.console.log(message);
@@ -50,6 +53,9 @@
 					//$('.outcome_container .header span.stockprice').text(data.stock0);
 				}
 			});
+			
+
+			
 		</script>		
 		
 
@@ -65,7 +71,17 @@
 			*/
 			
 			$(function (){
-				
+
+				$( "body" ).delegate( "#testbutton" , "click", function(e) {
+					//$( "#graph0.graphDimension g.highcharts-button" ).trigger("click")
+					console.log(data[1]);
+					charts[0].addSeries(data[1]);
+					console.log("chart2: "+chart);
+					console.log("chart3: "+chart[0]);
+					console.log("chart4: "+chart[0].series);
+					chart[0].series[0].addPoint([time*i*1000, Math.round(Math.random() * 100)]);
+				});
+					
 				$( "#lineup" ).bind( "click" , function(){ buyLineMove("up"); });
 				$( "#linedown" ).bind( "click" , function(){ buyLineMove("down"); });
 
@@ -102,7 +118,7 @@
 		
 	</head>
 	<body>
-		
+		<div id="testbutton" style="position:relative;left:56px;top:10px;width:150px;height:25px;background-color:red">click button</div>
 		<div id="clock-up" style="position:relative;left:56px;top:10px;width:150px;height:25px;background-color:red">Add 1 to score</div>
 		<div id="lineup" style="position:relative;left:56px;top:10px;width:150px;height:25px;background-color:#efe">Add 10 buy line</div>
 		<div id="linedown" style="position:relative;left:56px;top:10px;width:150px;height:25px;background-color:#efe">Minus 10 buy line</div>

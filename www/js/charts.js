@@ -13,7 +13,7 @@
 				yPosNew = (yPosNew > 150 ? 150 : yPosNew);
 
 				$( ".outcome_container.0 .graph .horizontal.buy" ).css({top:yPosNew});
-		}
+		};
 		
 			function initializeOutcomes() {
 				//console.log("outcomes");
@@ -42,7 +42,7 @@
 						// set the position: $("#anotherElementName").css({left:x,top:y});
 					}
 				});
-			}
+			};
 			
 //function initializeChart(id) {
 //$( "#graph"+id ).highcharts('StockChart',{
@@ -197,7 +197,7 @@ function initializeChart2(id) {
 		}]
 	});
 
-}
+};
 			
 
 
@@ -208,11 +208,35 @@ function initializeChart2(id) {
 
 function initializeChart(id) {
 // Create the chart
-		$('#graph'+id).highcharts('StockChart', {
+
+	// generate an array of random data
+	data[id] = []; 
+	var time = (new Date()).getTime(), i;
+	for( i = -99; i <= 0; i++) {
+		data[id].push([
+		time + i * 1000,
+		Math.round(Math.random() * 100)
+		]);
+	}
+
+
+
+		console.log("chart: "+chart);
+		//chart[id] = {};
+		
+
+		chart[id] = $('#graph'+id).highcharts('StockChart', {
 			
+			addSeries: function(name) {
+	            this.chart.addSeries({
+	                name: name,
+	                data: [],
+	                id: Math.floor(Math.random()*1000)
+	            });
+	        },
 			chart: {
 		        //margin: 20,
-		        marginBottom: 20,
+		        marginBottom: -10,
 		        marginLeft: 0,
 		        marginTop: 0,
 		        marginRight: 0,
@@ -235,6 +259,7 @@ function initializeChart(id) {
 					type: 'all',
 					text: 'All'
 				}],
+				enabled: false,
 				inputEnabled: false,
 				selected: 0
 
@@ -245,8 +270,32 @@ function initializeChart(id) {
 			title : {
 				text : null
 			},
+			minTickInterval: 20,
+			showLastLabel: true,
+			gridLineColor : '#0f0',
+			minorGridLineColor: '#f00',
 			yAxis : {
-				min: 0
+				min: 0,
+				max: 100,
+				labels : {
+					enabled: false,
+					//align : 'left',
+					//y : 25,
+					//x : 50
+				},
+				plotBands: [
+					{ color: '#ffffff',from: 0,to: 10},
+					{ color: '#f5f5f5',from: 10,to: 20},
+					{ color: '#ffffff',from: 20,to: 30},
+					{ color: '#f5f5f5',from: 30,to: 40},
+					{ color: '#ffffff',from: 40,to: 50},
+					{ color: '#ffffff',from: 50,to: 60},
+					{ color: '#ffffff',from: 60,to: 70},
+					{ color: '#ffffff',from: 70,to: 80},
+					{ color: '#ffffff',from: 80,to: 90},
+					{ color: '#f5f5f5',from: 90,to: 100}
+				],
+
 			},
 			xAxis : {
 				//type: 'datetime',
@@ -277,19 +326,8 @@ function initializeChart(id) {
 				height: 6
 		    },
 			series : [{
-				name : null,
-				data : (function() {
-				// generate an array of random data
-				var data = [], time = (new Date()).getTime(), i;
-
-				for( i = -99; i <= 0; i++) {
-					data.push([
-						time + i * 1000,
-						Math.round(Math.random() * 100)
-					]);
-				}
-				return data;
-			})(),
+				name : 'Stock0',
+				data : data[id],
 				tooltip: {
 					valueDecimals: 2
 				}
@@ -298,6 +336,8 @@ function initializeChart(id) {
 
 
 
+		console.log('2');
+		console.log(chart[id]);
 
 
 }
