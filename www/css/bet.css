@@ -161,15 +161,18 @@ table {
 	-webkit-box-shadow: 0px 5px 5px 2px rgba(0, 0, 0, .3);
 	box-shadow: 0px 5px 5px 2px rgba(0, 0, 0, .3);
 }
-.graphDimension { width:616px;height:168px;background-color:#dfd;overflow:hidden;height:154px; }
-.outcome_container .graph .label.top { position:absolute;left:2px;top:1px; }
-.outcome_container .graph .label.center { position:absolute;left:2px;top:68px; }
-.outcome_container .graph .label.bottom { position:absolute;left:2px;top:137px; }
+/*.graphDimension { width:616px;height:168px;background-color:#fff;overflow:hidden;height:154px; }*/
+.graphDimension { width:616px;height:200px;background-color:#fff;overflow:hidden;height:154px; }
+.outcome_container .graph .label.top { position:absolute;left:2px;top:3px;font-size:9px;color:#929292; }
+.outcome_container .graph .label.center { position:absolute;left:2px;top:68px;font-size:9px;color:#929292; }
+.outcome_container .graph .label.bottom { position:absolute;left:2px;top:124px;font-size:9px;color:#929292; }
 
-.graph .horizontal.sell { background-color:#1D97C5;position:absolute;top:40px;width:616px;height:4px;cursor:pointer; }
+.graph .horizontal.sell { background-color:#1D97C5;position:absolute;top:10px;width:616px;height:4px;cursor:pointer; }
 .graph .horizontal.sell .stroke { background-color:#929292;position:relative;top:3px;width:616px;height:1px; }
-.graph .horizontal.buy { background-color:#AEB329;position:absolute;top:60px;width:616px;height:4px;cursor:pointer; }
+.graph .horizontal.sell .stroke { background-color:#1D97C5;position:relative;top:3px;width:616px;height:1px; }
+.graph .horizontal.buy { background-color:#AEB329;position:absolute;top:120px;width:616px;height:4px;cursor:pointer; }
 .graph .horizontal.buy .stroke { background-color:#929292;position:relative;top:3px;width:616px;height:1px; }
+.graph .horizontal.buy .stroke { background-color:#AEB329;position:relative;top:3px;width:616px;height:1px; }
 
 .outcome_container .right {float: right;width: 151px;height: 154px;	position:relative; left:-2px;}
 
@@ -254,11 +257,12 @@ top: 13px;
 	position:relative;
 	top:11px;
 	left:10px;
-	text-transform: uppercase;
+	text-transform:uppercase;
 }
 .header span.stockprice {
 	position:relative;
 	left:20px;
+	color:#1a8cbf;
 }
 .back {
 	position:relative;

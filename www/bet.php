@@ -29,6 +29,8 @@
 			var chart = [];
 			var data = [];
 			
+			var pusherEnabled = false;
+			if (pusherEnabled) {
 			Pusher.log = function(message) {
 				if (window.console && window.console.log) {
 					window.console.log(message);
@@ -53,7 +55,7 @@
 					//$('.outcome_container .header span.stockprice').text(data.stock0);
 				}
 			});
-			
+			}
 
 			
 		</script>		
@@ -73,13 +75,46 @@
 			$(function (){
 
 				$( "body" ).delegate( "#testbutton" , "click", function(e) {
-					//$( "#graph0.graphDimension g.highcharts-button" ).trigger("click")
-					console.log(data[1]);
-					charts[0].addSeries(data[1]);
-					console.log("chart2: "+chart);
-					console.log("chart3: "+chart[0]);
-					console.log("chart4: "+chart[0].series);
-					chart[0].series[0].addPoint([time*i*1000, Math.round(Math.random() * 100)]);
+					
+					console.log(Date.UTC(2013, 10, 10,18,50)*1000);
+					console.log(new Date(2013, 10, 10,18,50)*1000);
+					console.log((new Date()).getTime()*1000 - 10*60*1000);
+					console.log((new Date()).getTime()*1000);
+					console.log(( Date.UTC()));
+					console.log(( Date.UTC())*1000 - 10*60*1000);
+					var chart2 = $('#graph0').highcharts();
+					
+					var points=chart2.series[0].points;
+					console.log("a");
+					console.log(points);
+					//console.log(points);
+					//console.log(points[0]);
+					//console.log("x: "+points[points.length].x+", y: "+points[points.length].y);
+					/*
+					for(var i=0;i<points.length;i++){
+						if(points[i].x>=xValue)break;
+						yValue=points[i].y;
+					}
+					*/
+					chart2.xAxis[0].setExtremes(
+						Date.UTC(2013, 9, 1),
+						Date.UTC(2013, 10, 15)
+						//(new Date()).getTime()*1000 - 10*60*1000,
+						//(new Date()).getTime()*1000
+					);
+					
+					// trigger zoom button
+					// trigger a press on the first button
+					$( "#graph0.graphDimension g.highcharts-button" ).trigger("click")
+					console.log("ok: "+$( "#graph0.graphDimension g.highcharts-button" ).length );
+					// update graph with series or points
+					// get the graph to update
+					//var chart2 = $('#graph0').highcharts();
+					// add a new series
+					//chart2.addSeries({ name: 'New Series', data: data[1] });
+					// add a new point to a series
+					chart2.series[0].addPoint([(new Date()).getTime()*1*1000, Math.round(Math.random() * 100)], true, true);
+
 				});
 					
 				$( "#lineup" ).bind( "click" , function(){ buyLineMove("up"); });
