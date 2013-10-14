@@ -167,13 +167,21 @@ table {
 .outcome_container .graph .label.center { position:absolute;left:2px;top:68px;font-size:9px;color:#929292; }
 .outcome_container .graph .label.bottom { position:absolute;left:2px;top:124px;font-size:9px;color:#929292; }
 
-.graph .horizontal.sell { background-color:#1D97C5;position:absolute;top:10px;width:616px;height:4px;cursor:pointer; }
+.horizontalBarContainer { position:absolute;width:616px;height:134px;top:0;pointer-events:none; }
+.graph .horizontal.sell { pointer-events:auto;position:absolute;top:10px;width:616px;height:4px;cursor:pointer;border:0;margin:0;left:0;-webkit-border-radius:0;border-radius:0; }
+.graph .horizontal.sell.solid { background-color:#1D97C5; }
+.graph .horizontal.sell.dashed { background:url('../img/sell_dashed.png') repeat-x; }
+.graph .horizontal.sell.grey { background-color:#929292; }
+.graph .horizontal.buy { pointer-events:auto;position:absolute;top:100px;width:616px;height:4px;cursor:pointer;border:0;margin:0;left:0;-webkit-border-radius:0;border-radius:0; }
+.graph .horizontal.buy.solid { background-color:#AEB329; }
+.graph .horizontal.buy.dashed { background:url('../img/buy_dashed.png') repeat-x; }
+.graph .horizontal.buy.grey { background-color:#929292; }
+/*
 .graph .horizontal.sell .stroke { background-color:#929292;position:relative;top:3px;width:616px;height:1px; }
 .graph .horizontal.sell .stroke { background-color:#1D97C5;position:relative;top:3px;width:616px;height:1px; }
-.graph .horizontal.buy { background-color:#AEB329;position:absolute;top:120px;width:616px;height:4px;cursor:pointer; }
 .graph .horizontal.buy .stroke { background-color:#929292;position:relative;top:3px;width:616px;height:1px; }
 .graph .horizontal.buy .stroke { background-color:#AEB329;position:relative;top:3px;width:616px;height:1px; }
-
+*/
 .outcome_container .right {float: right;width: 151px;height: 154px;	position:relative; left:-2px;}
 
 .footer { 
@@ -354,6 +362,7 @@ text-transform:uppercase;
 position:relative;
 left:6px;
 top:-3px;
+float:left;
 }
 .left .back .content .price {
 position:relative;

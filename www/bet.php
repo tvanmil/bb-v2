@@ -9,6 +9,16 @@
 		<link rel="stylesheet" type="text/css" href="css/bet.css">
 		<link rel="stylesheet" type="text/css" href="css/menu.css">
 		<link rel="stylesheet" type="text/css" href="css/flipclock.css">
+		<!-- Include the following conditional to get click-throughs to work with IE -->
+		<!-- this is used to let mouse events pass through the horizontalBarContainer div -->
+		<!--[if IE]>
+		<style type="text/css">
+	        .sample {
+				filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='sample_600x600.png', sizingMethod='scale');
+				background:none !important;
+			}
+        </style>
+		<![endif]-->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script src="js/menu_new.js"></script>
@@ -63,6 +73,11 @@
 
 		<script type="text/javascript">
 			/*
+			Flipclock uses CSS3 animations
+			Website uses boxshadow, borderradius, cssgradients, fontface
+			Highcharts uses csstransforms
+			Not used are: csstransforms3d
+
 			if (Modernizr.borderradius) console.log("This browser supports borderradius");
 			if (Modernizr.boxshadow) console.log("This browser supports boxshadow");
 			if (Modernizr.cssanimations) console.log("This browser supports cssanimations");
@@ -117,9 +132,6 @@
 
 				});
 					
-				$( "#lineup" ).bind( "click" , function(){ buyLineMove("up"); });
-				$( "#linedown" ).bind( "click" , function(){ buyLineMove("down"); });
-
 				
 				setTimeout(function(){
 					//console.log('sethome');
@@ -155,9 +167,7 @@
 	<body>
 		<div id="testbutton" style="position:relative;left:56px;top:10px;width:150px;height:25px;background-color:red">click button</div>
 		<div id="clock-up" style="position:relative;left:56px;top:10px;width:150px;height:25px;background-color:red">Add 1 to score</div>
-		<div id="lineup" style="position:relative;left:56px;top:10px;width:150px;height:25px;background-color:#efe">Add 10 buy line</div>
-		<div id="linedown" style="position:relative;left:56px;top:10px;width:150px;height:25px;background-color:#efe">Minus 10 buy line</div>
-		<div id="clock-up" style="position:relative;left:56px;top:10px;width:640px;height:115px;background-color:lightgreen">
+		<div style="position:relative;left:56px;top:10px;width:640px;height:115px;background-color:lightgreen">
 			<p>Pusher dashboard</p>
 			<div style="float:left;width:150px;background-color:#efefef;">
 				<button type="button" onclick="BetBidding.test_setNewScore()">Push score</button>

@@ -1,20 +1,3 @@
-function buyLineMove(updown) {
-
-	var xPos = $(".outcome_container.0 .graph .horizontal.buy").position().left;
-	var yPos = $(".outcome_container.0 .graph .horizontal.buy").position().top;
-
-	console.log('x2: ' + xPos);
-	console.log('y2: ' + yPos);
-
-	var yPosNew = (updown === 'up' ? yPos - 10 : yPos + 10);
-
-	yPosNew = (yPosNew < 0 ? 0 : yPosNew);
-	yPosNew = (yPosNew > 150 ? 150 : yPosNew);
-
-	$(".outcome_container.0 .graph .horizontal.buy").css({
-		top : yPosNew
-	});
-};
 
 function initializeOutcomes() {
 	//console.log("outcomes");
@@ -37,272 +20,32 @@ function initializeOutcomes() {
 	});
 	$(".graph .horizontal.buy").draggable({
 		containment : "parent",
-		start : function() {
-		},
-		drag : function() {
-		},
+		start : function() {},
+		drag : function() {},
 		stop : function(event, ui) {
 			// when dragging stopped, get the dragged outcome to id which number
 			// should be updated.
+			// Max is 126, min is 0.
 			var offset = $(this).offset();
 			var xPos = offset.left;
 			var yPos = offset.top;
 			console.log('x: ' + xPos + ", curr: " + $(this).position().left);
 			console.log('y: ' + yPos + ", curr: " + $(this).position().top);
-			console.log($(event.target).parent().parent().parent().attr("class"));
+			var className = $(event.target).parent().parent().parent().parent().attr("class");
+			console.log("cl: "+className);
+			console.log( className.substring( className.lastIndexOf(" ") + 1 ) );
+			var outcome = className.substring( className.lastIndexOf(" ") + 1 );
+			console.log("div.outcome_container." + outcome + " .content .left .buy .content .price input"  );
+			console.log("d:" + ( $(this).position().top/130 ).toFixed(2).toString() );
+			
+			// The area height is 130px from top to bottom of the graph
+			$( "div.outcome_container." + outcome + " .content .left .buy .content .price input" ).val( 100 - ( $(this).position().top/130*100 ).toFixed().toString() );
 			// set the position: $("#anotherElementName").css({left:x,top:y});
 		}
 	});
 };
 
 
-function initializeChart2(id) {
-	// Create the chart
-	var darkColor = '#f5f5f5';
-	var lightColor = '#fff';
-	// generate an array of random data
-	data[id] = [];
-	var time = (new Date()).getTime() * 1000;//, i;
-	//range: 1 * 1 * 1 * 2 * 60 * 1000, // six months
-	
-	for ( i = -99; i <= 0; i++) {
-		var y = Math.round(Math.random() * 100);
-		data[id].push([
-			time + i * 1 * 60 * 1000, 
-			y
-		]);
-		//console.log("d: "+ (time + i * 1 * 60 * 1000) +", y: "+y );
-	}
-	console.log("range: "+ (1 * 1 * 1 * 2 * 60 * 1000) );
-	//console.log("chart: " + chart);
-	//chart[id] = {};
-
-	chart[id] = $('#graph' + id).highcharts('StockChart', {
-
-		addSeries : function(name) {
-			this.chart.addSeries({
-				name : name,
-				data : [],
-				id : Math.floor(Math.random() * 1000)
-			});
-		},
-		chart : {
-			//margin: 20,
-			marginBottom : -10,
-			marginLeft : 0,
-			marginTop : 0,
-			marginRight : 0,
-			borderWidth : 0,
-			backgroundColor : 'transparent',
-			spacing : 0,
-			border : 0,
-			//backgroundColor: '#eff'
-		},
-		rangeSelector : {
-			buttons : [{
-				count : 1,
-				type : 'minute',
-				text : '1M'
-			}, {
-				count : 5,
-				type : 'minute',
-				text : '5M'
-			}, {
-				type : 'all',
-				text : 'All'
-			}],
-			enabled : false,
-			inputEnabled : false,
-			selected : 2
-
-		},
-		credits : {
-			enabled : false
-		},
-		title : {
-			text : null
-		},
-		minTickInterval : 100,
-		showLastLabel : true,
-
-		yAxis : {
-			GridLineWidth : 0,
-			minorGridLineWidth : 0,
-			gridLineColor : '#ffffff',
-			min : 0,
-			//max : 100,
-			labels : {
-				enabled : false,
-				//align : 'left',
-				//y : 25,
-				//x : 50
-			},
-			plotBands : [
-				{color : lightColor,from : 0,to : 10}, 
-				{color : darkColor,from : 10,to : 20}, 
-				{color : lightColor,from : 20,to : 30}, 
-				{color : darkColor,from : 30,to : 40}, 
-				{color : lightColor,from : 40,to : 50}, 
-				{color : darkColor,from : 50,to : 60}, 
-				{color : lightColor,from : 60,to : 70},
-				{color : darkColor,from : 70,to : 80}, 
-				{color : lightColor,from : 80,to : 90}, 
-				{color : darkColor,from : 90,to : 100 }
-
-				/*
-				 { color: '#ffffff',from: 0,to: 10},
-				 { color: '#f5f5f5',from: 10,to: 20},
-				 { color: '#ffffff',from: 20,to: 30},
-				 { color: '#f5f5f5',from: 30,to: 40},
-				 { color: '#ffffff',from: 40,to: 50},
-				 { color: '#ffffff',from: 50,to: 60},
-				 { color: '#ffffff',from: 60,to: 70},
-				 { color: '#ffffff',from: 70,to: 80},
-				 { color: '#ffffff',from: 80,to: 90},
-				 { color: '#f5f5f5',from: 90,to: 100}
-				 */
-			],
-
-		},
-		xAxis : {
-			//range: 6 * 30 * 24 * 3600 * 1000, // six months
-			//range: 1 * 1 * 1 * 2 * 60 * 1000 + 1*1000, // six months
-			gridLineWidth : 0,
-			minorGridLineWidth : 0,
-			//type: 'datetime',
-			tickWidth : 0,
-			lineWidth : 0,
-			startOnTick: true,
-			endOnTick: true,
-			offset : 2,
-			labels : {
-				enabled : false
-			}
-		},
-		navigator : {
-			enabled : true
-		},
-		exporting : {
-			enabled : false
-		},
-		scrollbar : {
-			barBackgroundColor : 'gray',
-			//barBorderRadius: 3,
-			//barBorderWidth: 0,
-			//buttonBackgroundColor: 'gray',
-			//buttonBorderWidth: 0,
-			//buttonBorderRadius: 3,
-			//trackBackgroundColor: 'none',
-			//trackBorderWidth: 1,
-			//trackBorderRadius: 3,
-			//trackBorderColor: '#CCC',
-			height : 6
-		},
-		series : [{
-			name : 'Stock0',
-			data : data[id],
-			tooltip : {
-				valueDecimals : 2
-			}
-		}]
-	});
-
-	console.log('2');
-	console.log(chart[id]);
-
-}
-
-
-
-
-function initializeChart3(id) {
-	var chart;
-	$( '#graph' + id ).highcharts('StockChart', {
-		// $('#container').highcharts({
-		chart : {
-			type : 'spline',
-			animation : Highcharts.svg, // don't animate in old IE
-			marginRight : 10,
-			events : {
-				load : function() {
-
-					// set up the updating of the chart each second
-					var series = this.series[0];
-					setInterval(function() {
-						var x = (new Date()).getTime(), // current time
-						y = Math.random();
-						//series.addPoint([x, y], true, true);
-					}, 1000);
-				}
-			}
-		},
-		title : {
-			text : null//'Live random data'
-		},
-		xAxis : {
-			type : 'datetime',
-			tickPixelInterval : 150
-		},
-		yAxis : {
-			title : {
-				text : 'Value'
-			},
-			plotLines : [{
-				value : 0,
-				width : 1,
-				color : '#808080'
-			}]
-		},
-		rangeSelector : {
-			buttons: [{
-				count: 1,
-				type: 'minute',
-				text: '1M'
-			}, {
-				count: 5,
-				type: 'minute',
-				text: '5M'
-			}, {
-				type: 'all',
-				text: 'All'
-			}],
-			enabled : true,
-			inputEnabled : true,
-			selected : 2
-
-		},
-		navigator : {
-			enabled : true
-		},
-		tooltip : {
-			formatter : function() {
-				//return '<b>' + this.series.name + '</b><br/>' + Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' + Highcharts.numberFormat(this.y, 2);
-			}
-		},
-		legend : {
-			enabled : false
-		},
-		exporting : {
-			enabled : false
-		},
-		series : [{
-			name : 'Random data',
-			data : (function() {
-				// generate an array of random data
-				var data = [], time = (new Date()).getTime(), i;
-
-				for ( i = -19; i <= 0; i++) {
-					data.push({
-						x : time + i * 1000,
-						y : Math.random()
-					});
-				}
-				return data;
-			})()
-		}]
-	});
-
-}
 
 function initializeChart(id) {
 		Highcharts.setOptions({
@@ -331,12 +74,13 @@ function initializeChart(id) {
                         setInterval(function() {
                             var m = Math.random();
                             var x = (new Date()).getTime(), // current time
-                                y = (m < 0.9 ? lastY : lastY + 100*(Math.random() < 0.5 ? 0.05 : -0.05));
-                            series.addPoint([x, y], true, true);
+                                y = (m < 0.8 ? lastY : lastY + 100*(Math.random() < 0.5 ? 0.05 : -0.05));
+                            //series.addPoint([x, y], true, true);
                         }, 1000);
                     }
                 }
             },
+			colors: [ '#000' ],
             title: {
                 text: null//'Live random data'
             },
@@ -384,6 +128,58 @@ function initializeChart(id) {
             exporting: {
                 enabled: false
             },
+			tooltip: {
+	            shared: true,
+	            useHTML: true,
+	            backgroundColor: {
+	                linearGradient: [0, 0, 0, 50],
+	                stops: [
+	                    [0, '#303030'],
+	                    [1, '#1f1f1f']
+	                ]
+	            },
+	            borderColor: '#000',
+	            style: {
+	                padding: 10,
+	                fontSize: '10px',
+	                fontWeight: 'bold',
+	                color: '#fff'
+	            },
+	            headerFormat: '',
+	            formatter: function() {
+	                return '&euro; ' + (this.y/100).toFixed(2);
+	            },
+	        },
+			plotOptions: {
+	            series: {
+	                lineWidth: 2,
+	                states: {
+	                    hover: { 
+	                    	enabled: true,
+	                    	lineWidth: 2
+						}
+	                },
+					shadow: {
+						color: '#000',
+						width: 3,
+						opacity: 0.15,
+						offsetY: 1,
+						offsetX: 1
+					},
+					marker: {
+						//radius:0,
+						//lineWidth:0,
+						lineColor:"#fff",
+						fillColor:"#000",
+	                    enabled: false,
+	                    states: {
+	                        hover: {
+	                            enabled: true
+	                        }
+	                    }
+	                }
+	            }
+	        },	        
             series: [{
                 turboThreshold : 100000,
                 name: 'Random data',
@@ -395,7 +191,7 @@ function initializeChart(id) {
 
                     for (i = -(5*60); i <= 0; i++) {
                         var m = Math.random();
-                        y = (m < 0.9 ? lastY : lastY + 100*(Math.random() < 0.5 ? 0.05 : -0.05));
+                        y = (m < 0.8 ? lastY : lastY + 100*(Math.random() < 0.5 ? 0.05 : -0.05));
                         if (y>100) y=100;
                         if (y<0) y=0;
                         lastY = y;
