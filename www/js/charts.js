@@ -75,7 +75,7 @@ function initializeChart(id) {
                             var m = Math.random();
                             var x = (new Date()).getTime(), // current time
                                 y = (m < 0.8 ? lastY : lastY + 100*(Math.random() < 0.5 ? 0.05 : -0.05));
-                            //series.addPoint([x, y], true, true);
+                            series.addPoint([x, y], true, true);
                         }, 1000);
                     }
                 }
