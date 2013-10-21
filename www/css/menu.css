@@ -1,18 +1,13 @@
 .container { float:left;width: 947px;padding-left: 13px;position: relative;left: 50%;margin-left: -480px;font-size:12px;}
-
 .fontBlue { color:#1a8cbf; }
 
 div#menu { z-index: 300;background-color: #2b2b2b;width: 49px;height: 100%;position: fixed;top:0;left:0;-webkit-box-shadow:  6px 0px 12px 0px rgba(0, 0, 0, 0.6);/*#2b2b2b; */box-shadow:  6px 0px 12px 0px rgba(0, 0, 0, 0.6);}
 div#menu .item { width: 49px;height: 48px;padding: auto;border: 0px;display: block;border-top: 1px solid black;border-bottom: 1px solid #5d5d5d;background: url('../img/menu.png') 0px 0px;}
-
 div#menu .item#home { background-position: 0 0;}
 div#menu .item#home.open { background-position: 0 -147px;}
 div#menu .item#home:hover { background-position: 0 -49px;}
 div#menu .item#home:active { background-position: 0 -98px;}
-
-/* correct the erroneous styling done by the .open styling */
-div#menu .item.open {margin-left:0; -webkit-border-radius: 0; border-radius: 0; }
-
+div#menu .item.open {margin-left:0; -webkit-border-radius: 0; border-radius: 0; } /* correct the erroneous styling done by the .open styling */
 div#menu .item#profile { background-position: -50px 0; }
 div#menu .item#profile.open { background-position: -50px -147px; }
 div#menu .item#profile.open:hover { background-position: -50px -147px; }
@@ -39,35 +34,15 @@ div#menu .item#search:hover { background-position: -200px -49px; }
 div#menu .item#search:active { background-position: -200px -98px; }
 
 
-div#submenucontainer { position: fixed;width: 0;height: 100%;z-index: 200;background-color: #4c4c4c;border-right: 1px solid #030303;border-top: 1px solid #030303;padding: 0px;top: 0px;overflow: hidden;-webkit-box-shadow:  6px 0px 10px 0px rgba(0, 0, 0, 0.4);box-shadow:  6px 0px 10px 0px rgba(0, 0, 0, 0.4);	}
-div#submenucontainer .left {width: 226px;height: 100%;border-right: 1px solid #000;float:left;}
-
 
 div#overlay { position: fixed;width: 100%;height: 100%;z-index: 100;background-color: #000;padding: 0px;top: 0px;opacity: 0;visibility:hidden;}
 
 
-div#submenucontainer .header {
-	height: 33px;
-	border-top: 1px solid #585858;
-	border-bottom: 1px solid #000;
-	background: #363636; /* Old browsers */
-	background: -moz-linear-gradient(top,  #363636 11%, #191919 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(11%,#363636), color-stop(100%,#191919)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #363636 11%,#191919 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #363636 11%,#191919 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #363636 11%,#191919 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #363636 11%,#191919 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#363636', endColorstr='#191919',GradientType=0 ); /* IE6-9 */
-	color: #fff;
-	
-}
-
+div#submenucontainer { position: fixed;width: 0;height: 100%;z-index: 200;background-color: #4c4c4c;border-right: 1px solid #030303;border-top: 1px solid #030303;padding: 0px;top: 0px;overflow: hidden;-webkit-box-shadow:  6px 0px 10px 0px rgba(0, 0, 0, 0.4);box-shadow:  6px 0px 10px 0px rgba(0, 0, 0, 0.4);	}
+div#submenucontainer .left {width: 226px;height: 100%;border-right: 1px solid #000;float:left;}
+div#submenucontainer .header { height: 33px;border-top: 1px solid #585858;border-bottom: 1px solid #000;background: #363636; /* Old browsers */background: -moz-linear-gradient(top,  #363636 11%, #191919 100%); /* FF3.6+ */background: -webkit-gradient(linear, left top, left bottom, color-stop(11%,#363636), color-stop(100%,#191919)); /* Chrome,Safari4+ */background: -webkit-linear-gradient(top,  #363636 11%,#191919 100%); /* Chrome10+,Safari5.1+ */background: -o-linear-gradient(top,  #363636 11%,#191919 100%); /* Opera 11.10+ */background: -ms-linear-gradient(top,  #363636 11%,#191919 100%); /* IE10+ */background: linear-gradient(to bottom,  #363636 11%,#191919 100%); /* W3C */filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#363636', endColorstr='#191919',GradientType=0 ); /* IE6-9 */color: #fff;}
 div#submenucontainer .header .title { position: relative;top: 7px;left: 20px;font-size: 12px;}
-
-
-/*
-* Menu contents
-*/
+/* Menu contents*/
 #submenucontainer .item.active, #submenucontainer .item:active { background-color: #5d5d5d;border-top: 1px solid #424242;border-bottom: 1px solid #6f6f6f;}
 #submenucontainer .item:hover { background-color: #686868;}
 #submenucontainer .item { float:left;width:100%;height:32px;background-color:#5c5c5c;border-top:1px solid #6f6f6f;border-bottom:1px solid #383838;font-size:11px;color:#fff;}
@@ -79,7 +54,6 @@ div#submenucontainer .header .title { position: relative;top: 7px;left: 20px;fon
 #submenucontainer .right .left {float:left;width:158px;height:105px;border-right:1px solid #383838;background-color:#4c4c4c;}
 #submenucontainer .right .middle {float:left;width:195px;height:105px;border-right: 1px solid #383838;border-left: 1px solid #6f6f6f;background-color:#4c4c4c;	}
 #submenucontainer .right .right {float:left;width:219px;height:105px;border:0;border-left: 1px solid #6f6f6f;background-color:#4c4c4c;}
-
 #submenucontainer .right .left .title { float:left;clear:both;position:relative;top:23px;left:15px;color:#fff;font-size:11px;font-weight:Bold; }
 #submenucontainer .right .left .value { float:left;clear:both;position:relative;top:33px;left:15px;color:#1a8cbf;font-size:22px;font-weight:Bold; }
 #submenucontainer .right .middle .title { float:left;clear:left;position:relative;top:23px;left:15px;color:#fff;font-size:11px; height:25px;}
@@ -92,22 +66,7 @@ div#submenucontainer .header .title { position: relative;top: 7px;left: 20px;fon
 #submenucontainer .right .right .checkout:active { background-position: -203px -264px;}
 
 
-div#submenucontainer .right .subheader {
-	height: 33px;
-	float:left;
-	width:100%;
-	border-top: 1px solid #585858;
-	border-bottom: 1px solid #000;
-	background: #363636; /* Old browsers */
-	background: -moz-linear-gradient(top,  #363636 11%, #191919 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(11%,#363636), color-stop(100%,#191919)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #363636 11%,#191919 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #363636 11%,#191919 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #363636 11%,#191919 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #363636 11%,#191919 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#363636', endColorstr='#191919',GradientType=0 ); /* IE6-9 */
-	color: #fff;
-}
+div#submenucontainer .right .subheader {height: 33px;float:left;width:100%;border-top: 1px solid #585858;border-bottom: 1px solid #000;background: #363636; /* Old browsers */background: -moz-linear-gradient(top,  #363636 11%, #191919 100%); /* FF3.6+ */background: -webkit-gradient(linear, left top, left bottom, color-stop(11%,#363636), color-stop(100%,#191919)); /* Chrome,Safari4+ */background: -webkit-linear-gradient(top,  #363636 11%,#191919 100%); /* Chrome10+,Safari5.1+ */background: -o-linear-gradient(top,  #363636 11%,#191919 100%); /* Opera 11.10+ */background: -ms-linear-gradient(top,  #363636 11%,#191919 100%); /* IE10+ */background: linear-gradient(to bottom,  #363636 11%,#191919 100%); /* W3C */filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#363636', endColorstr='#191919',GradientType=0 ); /* IE6-9 */color: #fff;}
 div#submenucontainer .right .subheader div {float:left;position: relative;top: 7px;left: 20px;font-size: 12px;}
 
 div#submenucontainer .right .subheader .bbFontLight { position:relative;top:11px; }
@@ -123,17 +82,14 @@ div#submenucontainer .right .debitcredit { width:85px; }
 div#submenucontainer .right .amount { width:70px; }
 div#submenucontainer .right .description { width:198px; }
 div#submenucontainer .right .balance { width:87px; }
-
 div#submenucontainer .right .item { border-top:1px solid #969696;border-bottom:1px solid #545454;background-color:#6c6c6c; }
 div#submenucontainer .right .item div { float:left;position:relative;top:9px;left:20px;font-size:12px;text-transform:uppercase; }
 div#submenucontainer .right .item:hover { background-color:#8b8b8b; }
 div#submenucontainer .right .item:active { background-color:#5d5d5d;border-top:1px solid #424242;border-bottom:1px solid #5d5d5d; }
-/*div#submenucontainer .right .item div.even { background-color:#6c6c6c; }*/
 
 #submenucontainer .right .content .textitem { float:left;position:relative;top:30px;width:400px;left:30px; font-size:11px;color:#fff;height:40px;text-transform:uppercase;clear:both;}
 #submenucontainer .right .content .textitem .label { float:left;position:relative;top:8px;width: 120px;font-size: 11px;color: #fff;}
 #submenucontainer .right .content .textitem input { position: relative;float: left;margin-bottom: 14px;padding-left: 6px;left:20px;width: 184px;height: 24px;color: #515151;font-size: 11px;border: 0px;background: url('../img/menu.png') 0 -299px;}
-
 #submenucontainer .right .content .save { float:left;position:relative;top:50px;left:28px;width:198px;height:34px;background: url('../img/menu.png') -402px -197px;}
 #submenucontainer .right .content .save:hover { background-position: -402px -231px;}
 #submenucontainer .right .content .save:active { background-position: -402px -264px;}
@@ -141,61 +97,36 @@ div#submenucontainer .right .item:active { background-color:#5d5d5d;border-top:1
 /* logged in / logged out part top right */
 #status { position:fixed;z-index:900;float:right;top:0;top:0;right:35px;width:308px;height:100px; }
 #status input { float:left;position:relative;left:8px;top:8px;background: url('../img/menu.png') -260px -6px;width: 103px;height: 26px;font-size: 11px;border: 0;margin: 0;margin-right: 5px;padding: 0;padding-left: 8px;color:#515151; }
-#status .top { width:306px;height:73px;background-color:#ff0;float:left;border:1px solid #000;
-	background: #353535; /* Old browsers */
-	background: -moz-linear-gradient(top,  #353535 0%, #242424 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#353535), color-stop(100%,#242424)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #353535 0%,#242424 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #353535 0%,#242424 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #353535 0%,#242424 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #353535 0%,#242424 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#353535', endColorstr='#242424',GradientType=0 ); /* IE6-9 */
-}
+#status .top { width:306px;height:73px;background-color:#ff0;float:left;border:1px solid #000;background: #353535; /* Old browsers */background: -moz-linear-gradient(top,  #353535 0%, #242424 100%); /* FF3.6+ */background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#353535), color-stop(100%,#242424)); /* Chrome,Safari4+ */background: -webkit-linear-gradient(top,  #353535 0%,#242424 100%); /* Chrome10+,Safari5.1+ */background: -o-linear-gradient(top,  #353535 0%,#242424 100%); /* Opera 11.10+ */background: -ms-linear-gradient(top,  #353535 0%,#242424 100%); /* IE10+ */background: linear-gradient(to bottom,  #353535 0%,#242424 100%); /* W3C */filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#353535', endColorstr='#242424',GradientType=0 ); /* IE6-9 */}
 #status .colorBar { width:100%;height:1px;background-color:#5d5d5d; }
 #status #login { float:left;position:relative;left:8px;top:8px;background: url('../img/menu.png') -260px -32px;width: 60px;height: 27px;color: #515151;font-size: 11px;border: 0;margin: 0;margin-right: 5px;padding: 0;padding-left: 8px;}
 #status #login:hover { background-position: -260px -60px; }
 #status #login:active { background-position: -260px -88px; }
 #status .registerLink { font-size:10px;font-weight:bold;text-transform:uppercase;float:left;position:relative;top:20px;left:8px;color:#fff;}
-#status #statusButton { position:relative;float:right;width:53px;height:25px;border:1px solid black;border-top:0px;	font-size:16px;top:-1px;
-	background: #242424; /* Old browsers */
-	background: -moz-linear-gradient(top,  #242424 0%, #1f1f1f 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#242424), color-stop(100%,#1f1f1f)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #242424 0%,#1f1f1f 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #242424 0%,#1f1f1f 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #242424 0%,#1f1f1f 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #242424 0%,#1f1f1f 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#242424', endColorstr='#1f1f1f',GradientType=0 ); /* IE6-9 */
-}
+#status #statusButton { position:relative;float:right;width:53px;height:25px;border:1px solid black;border-top:0px;	font-size:16px;top:-1px;background: #242424; /* Old browsers */background: -moz-linear-gradient(top,  #242424 0%, #1f1f1f 100%); /* FF3.6+ */background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#242424), color-stop(100%,#1f1f1f)); /* Chrome,Safari4+ */background: -webkit-linear-gradient(top,  #242424 0%,#1f1f1f 100%); /* Chrome10+,Safari5.1+ */background: -o-linear-gradient(top,  #242424 0%,#1f1f1f 100%); /* Opera 11.10+ */background: -ms-linear-gradient(top,  #242424 0%,#1f1f1f 100%); /* IE10+ */background: linear-gradient(to bottom,  #242424 0%,#1f1f1f 100%); /* W3C */filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#242424', endColorstr='#1f1f1f',GradientType=0 ); /* IE6-9 */}
 #status #statusButton:hover { cursor: pointer; }
 #status #statusButton .loginText { display:block;position:relative;top:6px;left:6px;float:left;font-size:14px;color:#fff; }
 #status #statusButton .loginArrow { display:block;position:relative;float:left;width:8px;height:6px;top:9px;left:9px;background:url('../img/menu.png') -260px 0px; }
 #status #statusButton .loginArrow.down { top:11px;background-position: -268px 0px; }
-
-
-#status .in { position:fixed;z-index:900;float:right;top:0;top:0;right:35px;height:27px;
-	border:1px solid #000;
-	background: #363636; /* Old browsers */
-	background: -moz-linear-gradient(top,  #363636 1%, #1b1b1b 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#363636), color-stop(100%,#1b1b1b)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #363636 1%,#1b1b1b 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #363636 1%,#1b1b1b 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #363636 1%,#1b1b1b 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #363636 1%,#1b1b1b 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#363636', endColorstr='#1b1b1b',GradientType=0 ); /* IE6-9 */
-}
-
-#status .in .item { 
-	float:left;
-	border-left:1px solid #5d5d5d;
-	border-right:1px solid #000;	
-
-}
-
-#status .in .text {
-	color:#fff;
-	position:relative;
-	float:left;
-	padding: 6px 10px 8px 10px;	
-}
-
+#status .in { position:fixed;z-index:900;float:right;top:0;top:0;right:35px;height:27px;border:1px solid #000;background: #363636; /* Old browsers */background: -moz-linear-gradient(top,  #363636 1%, #1b1b1b 100%); /* FF3.6+ */background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#363636), color-stop(100%,#1b1b1b)); /* Chrome,Safari4+ */background: -webkit-linear-gradient(top,  #363636 1%,#1b1b1b 100%); /* Chrome10+,Safari5.1+ */background: -o-linear-gradient(top,  #363636 1%,#1b1b1b 100%); /* Opera 11.10+ */background: -ms-linear-gradient(top,  #363636 1%,#1b1b1b 100%); /* IE10+ */background: linear-gradient(to bottom,  #363636 1%,#1b1b1b 100%); /* W3C */filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#363636', endColorstr='#1b1b1b',GradientType=0 ); /* IE6-9 */ }
+#status .in .item { float:left;border-left:1px solid #5d5d5d;border-right:1px solid #000;}
+#status .in .text { color:#fff;position:relative;float:left;padding: 6px 10px 8px 10px;	}
 #status .in .text .balance { position:relative;left:6px; }
+
+
+#register { visibility:hidden;z-index: 1500;width:505px;height: 395px;position: absolute;float: left;left: 50%;top: 50%;margin-top: -204px;margin-left: -252px;background-color:#4c4c4c;-webkit-border-radius: 10px;border-radius: 10px; }
+#register .heading { float:left;width:485px;height:30px;color:#ffffff;font-size:16px;text-align:center;padding-top:12px;padding-left:20px;border:0;border-top:1px solid #545454;border-bottom:1px solid #000000;background: #313131; /* Old browsers */background: -moz-linear-gradient(top,  #313131 0%, #212121 100%); /* FF3.6+ */background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#313131), color-stop(100%,#212121)); /* Chrome,Safari4+ */background: -webkit-linear-gradient(top,  #313131 0%,#212121 100%); /* Chrome10+,Safari5.1+ */background: -o-linear-gradient(top,  #313131 0%,#212121 100%); /* Opera 11.10+ */background: -ms-linear-gradient(top,  #313131 0%,#212121 100%); /* IE10+ */background: linear-gradient(to bottom,  #313131 0%,#212121 100%); /* W3C */filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#313131', endColorstr='#212121',GradientType=0 ); /* IE6-9 */-webkit-border-radius: 10px 10px 0px 0px;border-radius: 10px 10px 0px 0px; }
+#register .heading .button { position: relative;float: right;margin-right: 5px;width: 25px;top: -3px;height: 25px;background: url('../img/menu.png') -248px -299px;}
+#register .heading .button:hover { background-position: -273px -299px;}
+#register .heading .button:active { background-position: -298px -299px;}
+#register .left { float:left;width:215px;position:relative;top:30px;left: 17px;}
+#register .left input {float:left;clear:both;background: url('../img/menu.png') 0 -297px;margin: 0 0 14px 0;width: 185px;height: 26px;color: #515151;font-size: 11px;border:0;padding:0 0 0 6px; }
+#register .left .button {position: relative;float:left;right: 2px;top: 5px;width: 104px;height: 34px;clear:both;background: url('../img/menu.png') -600px -197px;}
+#register .left .button:hover { background-position: -600px -231px;}
+#register .left .button:active { background-position: -600px -265px;}
+#register .right { float:left;width:250px;position:relative;left:20px;top:30px;color:#ffffff;font-size:12px;text-shadow: black 1px 1px 1px;line-height:16px;}
+
+
+
+
+

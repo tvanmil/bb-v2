@@ -51,10 +51,17 @@ $(document).ready(function() {
 	});
 	
 	$( "body" ).delegate( "div#overlay", 'click', function(event) {
+		console.log("1");
 		// remove overlay and retract open menus
 		if ( $( "div#submenucontainer" ).data( "open" ) ) {
+			console.log("4");
 			retractMenu( $( "div#submenucontainer" ).data( "type" ), function() {} );
+		} else if ( $( "div#register" ).data( "open" ) ) {
+			// click was on overlay for register
+			$( "div#register" ).css( { visibility: 'hidden' } );
+			$( "div#register" ).data( "open", false );
 		}
+		console.log("3");
 		removeOverlay();
 	});
 	
@@ -104,6 +111,35 @@ $(document).ready(function() {
 		 }
 	});
 	
+	
+	// attach event handlers for login menu + register form
+	$( "body" ).delegate( "div.registerLink span.fontBlue" , 'click', function(event) {
+		// fired when the user clicks "register" in the login menu
+		console.log( "register link clicked") ;
+		// open register form
+		$( "div#register" ).css( { visibility: 'visible' } );
+		$( "div#overlay" ).css( { visibility: 'visible' } );
+		$( "div#overlay" ).animate( { opacity: 0.85 }, BetBiddingMenu.animationSpeed );
+		$( "div#register" ).data( "open", true );
+
+		//show overlay
+	});
+	
+	$( "body" ).delegate( "div#register .left .button" , 'click', function(event) {
+		// fired when the user clicks "register" button in the register form
+		console.log( "register form button clicked") ;
+	});
+
+	$( "body" ).delegate( "div#register .heading .button" , 'click', function(event) {
+		// fired when the user clicks the "close" icon in the register form ("x" in top right corner)
+		console.log( "register form close button clicked");
+		$( "div#register" ).css( { visibility: 'hidden' } );
+		$( "div#overlay" ).animate( { opacity: 0 }, BetBiddingMenu.animationSpeed, function() {
+			$( "div#overlay" ).css( 'visibility' , 'hidden' );
+			$( "div#register" ).data( "open", false );
+		} );	
+	});
+
 });
 
 
@@ -122,38 +158,32 @@ function openMenu(item, subitem) {
 	// script that returns JSON data should however first be created.
 	//var menuData = JSON.parse(data);
 	var menuData = "data"; 
-	console.log("A: "+item);
+
 	if ( item === 'profile' || item === 'activematches' ) {
 		data = { type: item, subitem: subitem };
-		console.log("type: "+item+ ", subitem: "+subitem );
+
 		$.ajax({
 			type:'GET',
 			url:'devfiles/menu.php',
 			cache:false,
 			data:data,
 			success:(function (d){
-				console.log("temp MD: "+menuData);
-				console.log("received: "+d);
+				
 				menuData = {};
 				menuData.subitem = subitem;
 				menuData.content = JSON.parse(d); 
-
-				console.log("item: "+item+", menuData: ");
-				console.log(new EJS({ url: 'templates/menu.ejs' }).render( { item: item, data: menuData } ));
 				$( "div#submenucontainer" ).html( new EJS({ url: 'templates/menu.ejs' }).render( { item: item, data: menuData } ) );
 
 			})
 		});
 	} 
 
-	console.log("and now: "+JSON.stringify(menuData));
-		
 	// resize to 'width'
 	$( "div#submenucontainer" ).css( 'width', BetBiddingMenu.widths[item] + "px") ;
 
 	// animate to left:0
 	$( 'div#submenucontainer' ).animate(
-		{ left: 49 +"px"}, BetBiddingMenu.animationSpeed, function() { /* callback() */ }
+		{ left: 49 +"px" }, BetBiddingMenu.animationSpeed, function() { /* callback() */ }
 	);
 	$( "div#overlay" ).css( 'visibility','visible' );
 	$( "div#overlay" ).animate( { opacity: 0.85 }, BetBiddingMenu.animationSpeed );
@@ -189,6 +219,7 @@ function retractMenu(item, callback) {
 
 
 function removeOverlay() {
+	console.log("2");
 	$( "div#overlay" ).animate( { opacity: 0 }, BetBiddingMenu.animationSpeed, function() {
 		$( "div#overlay" ).css( 'visibility','hidden' );	
 	} );

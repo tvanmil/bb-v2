@@ -39,12 +39,11 @@
 			var charts = [];
 			var data = [];
 			var dataAll = [];
-			var test = 'thijs';
-			var repeat = 0;
-			
+			var currentY = 0; // this variable should be update by the pusher messages
 
 			var pusherEnabled = false;
 			if (pusherEnabled) {
+				
 			Pusher.log = function(message) {
 				if (window.console && window.console.log) {
 					window.console.log(message);
@@ -66,9 +65,9 @@
 					for (var i = 0; i<data.data.length; i++) {
 						$( ".outcome_container." + i + " .header span.stockprice" ).text( data.data[i]+"ct" );
 					}
-					//$('.outcome_container .header span.stockprice').text(data.stock0);
 				}
 			});
+			
 			}
 
 			
@@ -94,8 +93,14 @@
 			$(function (){
 
 				$( "body" ).delegate( "#insertSeries" , "click", function(e) {
-					console.log("# in graph: "+ data[0].length + ", # in total: "+dataAll[0].length);
-					console.log("JSON: "+JSON.stringify(dataAll[0]));
+					
+					var chart2 = $('#graph0').highcharts();
+					var points=chart2.series[0].points;
+					//points.length == currently visible points
+					
+					console.log("# graph: "+data[0].length+", # dataAll: "+dataAll[0].length+", #chart: "+points.length);
+					
+					//console.log("JSON: "+JSON.stringify(dataAll[0]));
 
 					// The basic working of 'zoom' buttons. Remove the current series
 					// and add a new series as a subset of the total available data.
@@ -112,42 +117,30 @@
 				
 				$( "body" ).delegate( "#testbutton" , "click", function(e) {
 					
-					console.log(Date.UTC(2013, 10, 10,18,50)*1000);
-					console.log(new Date(2013, 10, 10,18,50)*1000);
-					console.log((new Date()).getTime()*1000 - 10*60*1000);
-					console.log((new Date()).getTime()*1000);
-					console.log(( Date.UTC()));
-					console.log(( Date.UTC())*1000 - 10*60*1000);
 					var chart2 = $('#graph0').highcharts();
 					
-					var points=chart2.series[0].points;
-					console.log("a");
-					console.log(points);
-					//console.log(points);
-					//console.log(points[0]);
-					//console.log("x: "+points[points.length].x+", y: "+points[points.length].y);
-					/*
-					for(var i=0;i<points.length;i++){
-						if(points[i].x>=xValue)break;
-						yValue=points[i].y;
-					}
-					*/
+					console.log('first: '+dataAll[0][0][1]+", last: "+dataAll[0][dataAll[0].length-1][1]);
+
+					var zoomLevels = [];
+					zoomLevels[0] = 1;
+					//(new Date()).getTime() - zoomLevels[0] * 1000
 					chart2.xAxis[0].setExtremes(
-						Date.UTC(2013, 9, 1),
-						Date.UTC(2013, 10, 15)
-						//(new Date()).getTime()*1000 - 10*60*1000,
-						//(new Date()).getTime()*1000
+						(new Date()).getTime() - zoomLevels[0] * 1000,
+						(new Date()).getTime()
 					);
 					
 					// trigger zoom button
 					// trigger a press on the first button
 					$( "#graph0.graphDimension g.highcharts-button" ).trigger("click")
 					console.log("ok: "+$( "#graph0.graphDimension g.highcharts-button" ).length );
+					
 					// update graph with series or points
 					// get the graph to update
 					//var chart2 = $('#graph0').highcharts();
+					
 					// add a new series
 					//chart2.addSeries({ name: 'New Series', data: data[1] });
+					
 					// add a new point to a series
 					chart2.series[0].addPoint([(new Date()).getTime()*1*1000, Math.round(Math.random() * 100)], true, true);
 
@@ -186,7 +179,7 @@
 		
 	</head>
 	<body>
-		<!--
+
 		<div id="insertSeries" style="position:relative;left:56px;top:10px;width:150px;height:25px;background-color:lightblue">refresh series</div>
 		<div id="testbutton" style="position:relative;left:56px;top:10px;width:150px;height:25px;background-color:red">click button</div>
 		<div id="clock-up" style="position:relative;left:56px;top:10px;width:150px;height:25px;background-color:red">Add 1 to score</div>
@@ -214,7 +207,7 @@
 				<input type="text" id="test_scoreAway" value="40" />
 			</div>
 		</div>
-		-->
+		
 		<div class="full_width_spacer"></div>
 		
 		<div class="container">

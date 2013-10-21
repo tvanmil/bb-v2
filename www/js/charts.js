@@ -7,20 +7,14 @@ function chartData(id) {
 	var lastY = 0.5*100;
 	var minutes = 1;
 
-	//data.push( { x : 't', y : '4' } );
 	for ( i = -(minutes * 10); i < 0; i++ ) {
 		var m = Math.random();
 		y = (m < 0.8 ? lastY : lastY + 100 * (Math.random() < 0.5 ? 0.05 : -0.05));
 		if (y > 100) y = 100;
 		if (y < 0) y = 0;
 		lastY = y;
-		d.push( { x : time + i * 1000, y : y } );
-		//data[id].push( { x : time + i * 1000, y : y } );
-		//var d = new Date((time + i * 1000));
-		//console.log("A: "+(time+i*1000));
-		//if (id===0) { t.push({ a: "a", b: new Date(time+i*1000) }); }
+		d.push( [time + i * 1000, y ] ); //array instead of object
 	}
-	//if (id === 0) console.log("JSON INIT: "+JSON.stringify(d));
 	return d;
 }
 
@@ -28,39 +22,22 @@ function chartData(id) {
 function updateGraph(id) {
 	// set up the updating of the chart each second
 	//var series = this.series[0];
-	if (true) return;
 	setInterval(function() {
-		if (id===0) {
-			//if (repeat > 5) return;
-			repeat++;
-		//console.log("length: "+data[id].length+", a: "+data[id][data[id].length-1]+", b: "+data[id][307]);
-		//console.log(data[id][data[id].length-1]);
-		}
-		var lastY = data[id][data[id].length-1].y;
+
+		var lastY = data[id][data[id].length-1][1];
 		var m = Math.random();
 		var x = (new Date()).getTime(), // current time
-		y = (m < 0.8 ? lastY : lastY + 100 * (Math.random() < 0.5 ? 0.05 : -0.05));
-		if (y > 100) y = 100;
-		if (y < 0) y = 0;
-		//if (id===0) {
-			//console.log("JSON a " +repeat+ ": "+JSON.stringify(dataAll[id]));
-	
-			//if (id===0) {console.log("lastY: "+lastY+", y: "+y); }
-			// push data point into main data array (zooming etc)
-			
-			// data[id].push pushed ook in dataAll!! 
-			data[id].push( {x: x, y: y} );//series.addPoint([x, y], true, true);
-			//console.log("JSON b1 " +repeat+ ": "+JSON.stringify(data[id]));
-			dataAll[id].push( {x: x, y: y} );
-			//console.log("JSON b2 " +repeat+ ": "+JSON.stringify(data[id]));
-			//console.log("JSON c " +repeat+ ": "+JSON.stringify(dataAll[id]));
-		//}
-		// add data point to graph
-		charts[id].series[0].addPoint({x: x, y: y}, true, true);
-		//if (id===0) console.log("JSON d " +repeat+ ": "+JSON.stringify(dataAll[id]));
-		//console.log("B: "+x);
+		currentY = (m < 0.8 ? lastY : lastY + 100 * (Math.random() < 0.5 ? 0.05 : -0.05));
+		if (currentY > 100) currentY = 100;
+		if (currentY < 0) currentY= 0;
 		
-		//if (id===0) { t.push({ a: "b", b: new Date(x) }); }
+		// push data point into main data array (zooming etc)
+		data[id].push( [x, currentY] );//series.addPoint([x, y], true, true);
+		dataAll[id].push( [x, currentY] );
+		
+		// add data point to graph
+		charts[id].series[0].addPoint( [x, currentY], true, true);
+		
 	}, 1000);
 }
 
@@ -74,7 +51,7 @@ function initializeOutcomes() {
 	var htmlOutcomes = new EJS({
 		url : "templates/outcome.ejs"
 	}).render(dataOutcomes);
-	$(".container#outcomes").html(htmlOutcomes);
+	$( ".container#outcomes" ).html(htmlOutcomes);
 	// .html() is synchroon dus hierna graph initializen...
 
 	for (var id = 0; id < dataOutcomes.outcomes.length; id++) {
@@ -87,33 +64,28 @@ function initializeOutcomes() {
 		});
 	}
 
-	$(".graph .horizontal.sell").draggable({
-		containment : "parent"
-	});
-	$(".graph .horizontal.buy").draggable({
+	$( ".graph .horizontal.sell" ).draggable({
+		
 		containment : "parent",
 		start : function() {},
-		drag : function() {},
-		stop : function(event, ui) {
-			// when dragging stopped, get the dragged outcome to id which number
-			// should be updated.
-			// Max is 126, min is 0.
-			var offset = $(this).offset();
-			var xPos = offset.left;
-			var yPos = offset.top;
-			console.log('x: ' + xPos + ", curr: " + $(this).position().left);
-			console.log('y: ' + yPos + ", curr: " + $(this).position().top);
-			var className = $(event.target).parent().parent().parent().parent().attr("class");
-			console.log("cl: "+className);
-			console.log( className.substring( className.lastIndexOf(" ") + 1 ) );
+		drag : function() {
+			var className = $( event.target ).parent().parent().parent().parent().attr( "class" );
 			var outcome = className.substring( className.lastIndexOf(" ") + 1 );
-			console.log("div.outcome_container." + outcome + " .content .left .buy .content .price input"  );
-			console.log("d:" + ( $(this).position().top/130 ).toFixed(2).toString() );
-			
-			// The area height is 130px from top to bottom of the graph
-			$( "div.outcome_container." + outcome + " .content .left .buy .content .price input" ).val( 100 - ( $(this).position().top/130*100 ).toFixed().toString() );
-			// set the position: $("#anotherElementName").css({left:x,top:y});
+			$( "div.outcome_container." + outcome + " .content .left .sell .content .price input" ).val( 100 - ( $( this ).position().top/130*100 ).toFixed().toString() );
 		}
+		
+	});
+	
+	$( ".graph .horizontal.buy" ).draggable({
+		
+		containment : "parent",
+		start : function() {},
+		drag : function() {
+			var className = $( event.target ).parent().parent().parent().parent().attr( "class" );
+			var outcome = className.substring( className.lastIndexOf(" ") + 1 );
+			$( "div.outcome_container." + outcome + " .content .left .buy .content .price input" ).val( 100 - ( $(this).position().top/130*100 ).toFixed().toString() );
+		}
+		
 	});
 };
 
@@ -253,7 +225,7 @@ function initializeChart(id, callback) {
 	            }
 	        },	        
             series: [{
-                turboThreshold : 100000,
+                turboThreshold : 0,
                 name: 'Random data',
                 data: data[id]/*(function() {
                     // generate an array of random data
