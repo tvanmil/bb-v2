@@ -36,9 +36,13 @@
 		<script src="js/charts.js"></script>
 		<script type="text/javascript">
 			// Enable pusher logging - don't include this in production
-			var chart = [];
+			var charts = [];
 			var data = [];
+			var dataAll = [];
+			var test = 'thijs';
+			var repeat = 0;
 			
+
 			var pusherEnabled = false;
 			if (pusherEnabled) {
 			Pusher.log = function(message) {
@@ -89,6 +93,23 @@
 			
 			$(function (){
 
+				$( "body" ).delegate( "#insertSeries" , "click", function(e) {
+					console.log("# in graph: "+ data[0].length + ", # in total: "+dataAll[0].length);
+					console.log("JSON: "+JSON.stringify(dataAll[0]));
+
+					// The basic working of 'zoom' buttons. Remove the current series
+					// and add a new series as a subset of the total available data.
+					
+					// data[0] should contain a slice of the total array of values
+					data[0] = dataAll[0].slice();
+
+					// remove the old series, add the new slice, then redraw.
+					charts[0].series[0].remove();
+					charts[0].addSeries( { name: 'test', data: data[0] } );
+					charts[0].series[0].redraw();
+					
+				});
+				
 				$( "body" ).delegate( "#testbutton" , "click", function(e) {
 					
 					console.log(Date.UTC(2013, 10, 10,18,50)*1000);
@@ -165,6 +186,8 @@
 		
 	</head>
 	<body>
+		<!--
+		<div id="insertSeries" style="position:relative;left:56px;top:10px;width:150px;height:25px;background-color:lightblue">refresh series</div>
 		<div id="testbutton" style="position:relative;left:56px;top:10px;width:150px;height:25px;background-color:red">click button</div>
 		<div id="clock-up" style="position:relative;left:56px;top:10px;width:150px;height:25px;background-color:red">Add 1 to score</div>
 		<div style="position:relative;left:56px;top:10px;width:640px;height:115px;background-color:lightgreen">
@@ -191,7 +214,7 @@
 				<input type="text" id="test_scoreAway" value="40" />
 			</div>
 		</div>
-
+		-->
 		<div class="full_width_spacer"></div>
 		
 		<div class="container">

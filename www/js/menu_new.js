@@ -10,6 +10,7 @@ BetBiddingMenu.animationSpeed = 400;
 
 $(document).ready(function() {
 	
+	$( "div#status" ).html( new EJS({ url: 'templates/statusStates.ejs' }).render( { state: 'loggedOut' } ) );
 	
 	// attach event handlers to the menu
 	$( 'div#menu' ).delegate( ".item", 'click', function(event) {
@@ -55,6 +56,52 @@ $(document).ready(function() {
 			retractMenu( $( "div#submenucontainer" ).data( "type" ), function() {} );
 		}
 		removeOverlay();
+	});
+	
+	
+	
+	// function to change the 'password' input field from plain text
+	// showing the watermark when on blur, and show the starred-input
+	// when focussed.
+	var watermarkPass = 'Password*';
+	var watermarkUser = 'Username*';
+	
+	//init, set watermark text 
+	$( "#status .top .password" ).val(watermarkPass);
+ 
+	//if blur and no value inside, set watermark text
+ 	$( "#status .top .password" ).blur(function(){
+  		if ($(this).val().length == 0){
+    		$(this).val(watermarkPass);
+            $(this).attr('type', 'text');
+		}
+ 	});
+ 
+	//if focus and text is watermrk, set it to empty
+	$( "#status .top .password" ).focus(function(){
+  		if ($(this).val() == watermarkPass){
+    		$(this).val('');
+            $(this).attr('type', 'password');
+		}
+ 	});
+ 	
+ 	//if blur and no value inside, set watermark text
+ 	$( "#status .top .username" ).blur(function(){ if ($(this).val().length == 0) $(this).val(watermarkUser); });
+	//if focus and text is watermrk, set it to empty
+	$( "#status .top .username" ).focus(function(){ if ($(this).val() == watermarkUser) $(this).val(''); });
+	
+	
+	// function to slide in / slide out the "login" view
+	$( "body" ).delegate( "#status #statusButton" , "click", function(e) {
+		 if ( !$( "#status #statusButton .loginArrow" ).hasClass( "down" ) ) {
+		 	// slide window up and change arrow direction
+		 	$( "#status" ).animate( { top: "-75px" }, { duration: 300, easing: 'easeOutBack'} );
+		 	$( "#status #statusButton .loginArrow" ).addClass( "down" );
+		 } else {
+		 	// slide window down and change direction
+		 	$( "#status" ).animate( { top: "0px" }, { duration: 300, easing: 'easeOutBack'} );
+		 	$( "#status #statusButton .loginArrow" ).removeClass( "down" );
+		 }
 	});
 	
 });

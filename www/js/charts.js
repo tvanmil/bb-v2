@@ -1,3 +1,69 @@
+var t = [];
+
+function chartData(id) {
+	var d = [];
+	var time = (new Date()).getTime();
+	var i;
+	var lastY = 0.5*100;
+	var minutes = 1;
+
+	//data.push( { x : 't', y : '4' } );
+	for ( i = -(minutes * 10); i < 0; i++ ) {
+		var m = Math.random();
+		y = (m < 0.8 ? lastY : lastY + 100 * (Math.random() < 0.5 ? 0.05 : -0.05));
+		if (y > 100) y = 100;
+		if (y < 0) y = 0;
+		lastY = y;
+		d.push( { x : time + i * 1000, y : y } );
+		//data[id].push( { x : time + i * 1000, y : y } );
+		//var d = new Date((time + i * 1000));
+		//console.log("A: "+(time+i*1000));
+		//if (id===0) { t.push({ a: "a", b: new Date(time+i*1000) }); }
+	}
+	//if (id === 0) console.log("JSON INIT: "+JSON.stringify(d));
+	return d;
+}
+
+
+function updateGraph(id) {
+	// set up the updating of the chart each second
+	//var series = this.series[0];
+	if (true) return;
+	setInterval(function() {
+		if (id===0) {
+			//if (repeat > 5) return;
+			repeat++;
+		//console.log("length: "+data[id].length+", a: "+data[id][data[id].length-1]+", b: "+data[id][307]);
+		//console.log(data[id][data[id].length-1]);
+		}
+		var lastY = data[id][data[id].length-1].y;
+		var m = Math.random();
+		var x = (new Date()).getTime(), // current time
+		y = (m < 0.8 ? lastY : lastY + 100 * (Math.random() < 0.5 ? 0.05 : -0.05));
+		if (y > 100) y = 100;
+		if (y < 0) y = 0;
+		//if (id===0) {
+			//console.log("JSON a " +repeat+ ": "+JSON.stringify(dataAll[id]));
+	
+			//if (id===0) {console.log("lastY: "+lastY+", y: "+y); }
+			// push data point into main data array (zooming etc)
+			
+			// data[id].push pushed ook in dataAll!! 
+			data[id].push( {x: x, y: y} );//series.addPoint([x, y], true, true);
+			//console.log("JSON b1 " +repeat+ ": "+JSON.stringify(data[id]));
+			dataAll[id].push( {x: x, y: y} );
+			//console.log("JSON b2 " +repeat+ ": "+JSON.stringify(data[id]));
+			//console.log("JSON c " +repeat+ ": "+JSON.stringify(dataAll[id]));
+		//}
+		// add data point to graph
+		charts[id].series[0].addPoint({x: x, y: y}, true, true);
+		//if (id===0) console.log("JSON d " +repeat+ ": "+JSON.stringify(dataAll[id]));
+		//console.log("B: "+x);
+		
+		//if (id===0) { t.push({ a: "b", b: new Date(x) }); }
+	}, 1000);
+}
+
 
 function initializeOutcomes() {
 	//console.log("outcomes");
@@ -11,8 +77,14 @@ function initializeOutcomes() {
 	$(".container#outcomes").html(htmlOutcomes);
 	// .html() is synchroon dus hierna graph initializen...
 
-	for (var i = 0; i < dataOutcomes.outcomes.length; i++) {
-		initializeChart(i);
+	for (var id = 0; id < dataOutcomes.outcomes.length; id++) {
+		var x = chartData(id);
+		data[id] = x;
+		dataAll[id] = x.slice();
+		initializeChart(id, function(){
+			charts[id] = $( '#graph' + id ).highcharts();
+			if (id===0) console.log("JSON INIT: "+JSON.stringify(dataAll[0]));
+		});
 	}
 
 	$(".graph .horizontal.sell").draggable({
@@ -47,7 +119,7 @@ function initializeOutcomes() {
 
 
 
-function initializeChart(id) {
+function initializeChart(id, callback) {
 		Highcharts.setOptions({
             global: {
                 useUTC: false
@@ -67,7 +139,7 @@ function initializeChart(id) {
                 margin: 0,
                 marginBottom: 20,
                 events: {
-                    load: function() {
+                    load: updateGraph(id)/*function() {
     
                         // set up the updating of the chart each second
                         var series = this.series[0];
@@ -77,7 +149,7 @@ function initializeChart(id) {
                                 y = (m < 0.8 ? lastY : lastY + 100*(Math.random() < 0.5 ? 0.05 : -0.05));
                             series.addPoint([x, y], true, true);
                         }, 1000);
-                    }
+                    }*/
                 }
             },
 			colors: [ '#000' ],
@@ -183,7 +255,7 @@ function initializeChart(id) {
             series: [{
                 turboThreshold : 100000,
                 name: 'Random data',
-                data: (function() {
+                data: data[id]/*(function() {
                     // generate an array of random data
                     var data = [],
                         time = (new Date()).getTime(),
@@ -201,10 +273,11 @@ function initializeChart(id) {
                         });
                     }
                     return data;
-                })()
+                })()*/
             }]
         });
-
+	
+	callback();
 	
 }
 

@@ -7,4 +7,7 @@
 	<div id="search" class="item"><a href="" class="menu_box_search" title="Search for matches"></a></div>
 </div>
 <div id="submenucontainer"></div>
+
+<div id="status"></div>
+
 <div id="overlay"></div>

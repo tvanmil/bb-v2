@@ -1,0 +1,33 @@
+<%if (state === 'loggedIn') { %>
+	<div class="in">
+		<div class="item">
+			<div class="colorBar"></div>
+			<span class="text bbFontLight">Welcome <span class="username bbFontLight">thijs</span></span>
+		</div>
+		<div class="item">
+			<div class="colorBar"></div>
+			<span class="text bbFontLight">Account balance <span class="balance fontBlue">&euro; 70.04</span>&nbsp;&nbsp;</span>
+		</div>
+		<div class="item">
+			<div class="colorBar"></div>
+			<span class="text bbFontLight">LOGOUT</span>
+		</div>
+	</div>
+<% } %>
+
+
+<%if (state === 'loggedOut') { %>
+	<div class="top">
+		<div class="colorBar"></div>
+		<input class="username" type="text" value="Username*">
+		<input class="password" type="text">
+		<div id="login"></div>
+		<div class="registerLink">
+			YOU DON'T HAVE A USERNAME? PLEASE <span class="fontBlue">REGISTER</span>
+		</div>
+	</div>
+	<div id="statusButton">
+		<div class="loginText bbFontLight">LOGIN</div>
+		<div class="loginArrow"></div>
+	</div>
+<% } %>
