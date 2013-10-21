@@ -9,9 +9,7 @@ function chartData(id) {
 
 	for ( i = -(minutes * 60); i < 0; i++ ) {
 		// demo mode (random y values) vs real mode.
-		var demo = false;
-		
-		if ( demo ) {
+		if ( demoMode ) {
 			var m = Math.random();
 			y = (m < 0.8 ? lastY : lastY + 100 * (Math.random() < 0.5 ? 0.05 : -0.05));
 			if (y > 100) y = 100;
@@ -34,10 +32,12 @@ function updateGraph(id) {
 		var lastY = data[id][data[id].length-1][1];
 		var m = Math.random();
 		var x = (new Date()).getTime(); // current time
-		currentY[id] = (m < 0.8 ? lastY : lastY + 100 * (Math.random() < 0.5 ? 0.05 : -0.05));
-		if (currentY[id] > 100) currentY[id] = 100;
-		if (currentY[id] < 0) currentY[id]= 0;
 		
+		if ( demoMode ) {
+			currentY[id] = (m < 0.8 ? lastY : lastY + 100 * (Math.random() < 0.5 ? 0.05 : -0.05));
+			if (currentY[id] > 100) currentY[id] = 100;
+			if (currentY[id] < 0) currentY[id]= 0;
+		}
 		// push data point into main data array (zooming etc)
 		data[id].push( [x, currentY[id]] );//series.addPoint([x, y], true, true);
 		dataAll[id].push( [x, currentY[id]] );

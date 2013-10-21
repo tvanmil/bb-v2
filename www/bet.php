@@ -40,7 +40,8 @@
 			var data = [];
 			var dataAll = [];
 			var currentY = []; // this variable should be update by the pusher messages
-
+			var demoMode = false;
+			
 			var pusherEnabled = false;
 			if (pusherEnabled) {
 				
