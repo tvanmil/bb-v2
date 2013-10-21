@@ -5,14 +5,21 @@ function chartData(id) {
 	var time = (new Date()).getTime();
 	var i;
 	var lastY = 0.5*100;
-	var minutes = 1;
+	var minutes = 5;
 
-	for ( i = -(minutes * 10); i < 0; i++ ) {
-		var m = Math.random();
-		y = (m < 0.8 ? lastY : lastY + 100 * (Math.random() < 0.5 ? 0.05 : -0.05));
-		if (y > 100) y = 100;
-		if (y < 0) y = 0;
-		lastY = y;
+	for ( i = -(minutes * 60); i < 0; i++ ) {
+		// demo mode (random y values) vs real mode.
+		var demo = false;
+		
+		if ( demo ) {
+			var m = Math.random();
+			y = (m < 0.8 ? lastY : lastY + 100 * (Math.random() < 0.5 ? 0.05 : -0.05));
+			if (y > 100) y = 100;
+			if (y < 0) y = 0;
+			lastY = y;
+		} else {
+			y = currentY[id];
+		}
 		d.push( [time + i * 1000, y ] ); //array instead of object
 	}
 	return d;
@@ -26,32 +33,27 @@ function updateGraph(id) {
 
 		var lastY = data[id][data[id].length-1][1];
 		var m = Math.random();
-		var x = (new Date()).getTime(), // current time
-		currentY = (m < 0.8 ? lastY : lastY + 100 * (Math.random() < 0.5 ? 0.05 : -0.05));
-		if (currentY > 100) currentY = 100;
-		if (currentY < 0) currentY= 0;
+		var x = (new Date()).getTime(); // current time
+		currentY[id] = (m < 0.8 ? lastY : lastY + 100 * (Math.random() < 0.5 ? 0.05 : -0.05));
+		if (currentY[id] > 100) currentY[id] = 100;
+		if (currentY[id] < 0) currentY[id]= 0;
 		
 		// push data point into main data array (zooming etc)
-		data[id].push( [x, currentY] );//series.addPoint([x, y], true, true);
-		dataAll[id].push( [x, currentY] );
+		data[id].push( [x, currentY[id]] );//series.addPoint([x, y], true, true);
+		dataAll[id].push( [x, currentY[id]] );
 		
 		// add data point to graph
-		charts[id].series[0].addPoint( [x, currentY], true, true);
+		charts[id].series[0].addPoint( [x, currentY[id]], true, true);
 		
 	}, 1000);
 }
 
 
-function initializeOutcomes() {
+function initializeOutcomes(dataOutcomes) {
 	//console.log("outcomes");
-	var dataOutcomes = {
-		title : "titel",
-		outcomes : ['Nederland', 'Italië', 'Gelijkspel']
-	};
-	var htmlOutcomes = new EJS({
-		url : "templates/outcome.ejs"
-	}).render(dataOutcomes);
-	$( ".container#outcomes" ).html(htmlOutcomes);
+
+	$( ".container#outcomes" ).html( new EJS( { url : "templates/outcome.ejs" } ).render(dataOutcomes) );
+	//$( ".container#outcomes" ).html(htmlOutcomes);
 	// .html() is synchroon dus hierna graph initializen...
 
 	for (var id = 0; id < dataOutcomes.outcomes.length; id++) {

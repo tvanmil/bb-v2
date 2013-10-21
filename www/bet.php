@@ -39,7 +39,7 @@
 			var charts = [];
 			var data = [];
 			var dataAll = [];
-			var currentY = 0; // this variable should be update by the pusher messages
+			var currentY = []; // this variable should be update by the pusher messages
 
 			var pusherEnabled = false;
 			if (pusherEnabled) {
@@ -167,12 +167,22 @@
 				var dataFlipClock = { title: "klok", numbers: [10,10], scores: ['home','away']	};
 				var htmlFlipClock = new EJS({url: "templates/flipclock.ejs" }).render(dataFlipClock);
 				$( ".scoreBoard" ).html(htmlFlipClock);
-
 				
 				$( ".content .left .sell" ).html( new EJS({url: 'templates/buttonStates.ejs'}).render({ buysell: 'sell', state: 'front' }) );
 				$( ".content .left .buy" ).html( new EJS({url: 'templates/buttonStates.ejs'}).render({ buysell: 'buy', state: 'front' }) );
 				
-				initializeOutcomes();
+				
+				// initialize when the game data has been retrieved.
+				// That includes outcome titles as well as latest currentY values
+				// The part below is placeholder for now..
+				currentY[0] = 10;
+				currentY[1] = 30;
+				currentY[2] = 55;
+				var dataOutcomes = {
+					title : "titel",
+					outcomes : ['Nederland', 'Italië', 'Gelijkspel']
+				};
+				initializeOutcomes(dataOutcomes);
 
 			});
 		</script>

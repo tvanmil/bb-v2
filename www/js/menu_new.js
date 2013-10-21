@@ -116,13 +116,10 @@ $(document).ready(function() {
 	$( "body" ).delegate( "div.registerLink span.fontBlue" , 'click', function(event) {
 		// fired when the user clicks "register" in the login menu
 		console.log( "register link clicked") ;
-		// open register form
 		$( "div#register" ).css( { visibility: 'visible' } );
 		$( "div#overlay" ).css( { visibility: 'visible' } );
 		$( "div#overlay" ).animate( { opacity: 0.85 }, BetBiddingMenu.animationSpeed );
 		$( "div#register" ).data( "open", true );
-
-		//show overlay
 	});
 	
 	$( "body" ).delegate( "div#register .left .button" , 'click', function(event) {
