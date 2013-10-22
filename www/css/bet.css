@@ -49,6 +49,14 @@ table {
 }
 
 /* CSS Document */
+html { 
+  background: url(../img/background_grass.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 @font-face {
   font-family: 'TerminalDosis-Bold';
   src: url('../font/TerminalDosis-Bold.eot');
